@@ -13,6 +13,9 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: intern-task-terraform/terraform
     steps:
       - uses: actions/checkout@v4
 
