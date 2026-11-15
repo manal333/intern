@@ -1,0 +1,27 @@
+name: intern-task-terraform ci
+
+on:
+  pull_request:
+    paths:
+      - "intern-task-terraform/**"
+  push:
+    branches: [main]
+    paths:
+      - "intern-task-terraform/**"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.12.0"
+
+      - name: Format check
+        run: terraform fmt -check -recursive
+
+      - name: Validate
+        run: terraform validate
